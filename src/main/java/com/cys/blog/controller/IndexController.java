@@ -1,8 +1,8 @@
 package com.cys.blog.controller;
 
-import com.cys.blog.exception.BlogNotFoundException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * @author sam
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @since 2019-09-15-1:49 PM
  **/
 @Controller
-public class TestController {
+public class IndexController {
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String index() {
         return "index";
     }
