@@ -20,6 +20,12 @@
 <!--中间内容-->
 <div class="m-container-small m-padded-tb-big">
     <div class="ui container">
+        <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+            <i class="close icon"></i>
+            <div class="header">提示：</div>
+            <p th:text="${message}">恭喜，操作成功！</p>
+        </div>
+
         <table class="ui teal celled table">
             <thead>
             <tr>
@@ -30,21 +36,23 @@
             </thead>
             <tbody>
             <tr th:each="type,iterStat : ${page.content}">
-                <td th:text="${iterStat.count}">1</td>
+                <td th:text="${iterStat.count}" style="text-align: center">1</td>
                 <td th:text="${type.name}"></td>
                 <td>
-                    <a  th:href="@{/admin/types/{id}/input(id=${type.id})}"
+                    <a th:href="@{/admin/types/{id}/input(id=${type.id})}"
                        class="ui mini teal basic button">编辑</a>
-                    <a  th:href="@{/admin/types/{id}/delete(id=${type.id})}" class="ui mini red  basic button">删除</a>
+                    <a th:href="@{/admin/types/{id}/delete(id=${type.id})}" class="ui red mini  basic button">删除</a>
                 </td>
             </tr>
             </tbody>
             <tfoot>
             <tr>
                 <th colspan="6">
-                    <div class="ui mini pagination menu">
-                        <a th:href="@{/admin/types(page=${page.number}-1)}" class=" item">上一页</a>
-                        <a th:href="@{/admin/types(page=${page.number}+1)}" class=" item">下一页</a>
+                    <div class="ui mini pagination menu" th:if="${page.totalPages}>1">
+                        <a th:href="@{/admin/types(page=${page.number}-1)}" th:unless="${page.first}"
+                           class=" item">上一页</a>
+                        <a th:href="@{/admin/types(page=${page.number}+1)}" th:unless="${page.last}"
+                           class=" item">下一页</a>
                     </div>
                     <a th:href="@{/admin/types/input}" class="ui mini right floated teal basic button">新增</a>
                 </th>
@@ -71,6 +79,11 @@
 
     $('.ui.dropdown').dropdown({
         on: 'hover'
+    });
+
+    //消息提示关闭初始化
+    $('.message.close').on('click', function () {
+        $(this).closest('.message');
     });
 
 </script>
