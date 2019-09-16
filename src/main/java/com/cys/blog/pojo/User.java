@@ -1,6 +1,7 @@
 package com.cys.blog.pojo;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "t_user")
 @Data
+@ToString(exclude = "blogs")
 public class User {
     @Id
     @GeneratedValue

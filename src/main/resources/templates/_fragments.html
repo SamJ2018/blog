@@ -17,7 +17,7 @@
 <nav th:fragment="menu(n)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
     <div class="ui container">
         <div class="ui inverted secondary stackable menu">
-            <h2 class="ui teal header item">Blog</h2>
+            <h2 class="ui teal header item">Dreamax</h2>
             <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==1}?'active'"><i class="home icon"></i>首页</a>
             <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==2}?'active'"><i class="idea icon"></i>分类</a>
             <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==3}?'active'"><i class="tags icon"></i>标签</a>
@@ -28,6 +28,7 @@
                     <input type="text" placeholder="搜索">
                     <i class="search link icon"></i>
                 </div>
+                <a th:href="@{/admin}" class="m-item item m-mobile-hide" >登陆</a>
             </div>
         </div>
     </div>

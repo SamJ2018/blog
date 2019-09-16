@@ -1,4 +1,4 @@
-package com.cys.blog.service;
+package com.cys.blog.service.type;
 
 import com.cys.blog.dao.TypeRepository;
 import com.cys.blog.exception.BlogNotFoundException;
@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * @author sam
@@ -37,6 +39,16 @@ public class TypeServiceImpl implements TypeService {
     @Override
     public Page<Type> listType(Pageable pageable) {
         return typeRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<Type> listType() {
+        return typeRepository.findAll();
+    }
+
+    @Override
+    public Type getTypeByName(String name) {
+        return typeRepository.findByName(name);
     }
 
     @Transactional

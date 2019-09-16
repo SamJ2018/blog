@@ -1,4 +1,4 @@
-package com.cys.blog.service;
+package com.cys.blog.service.user;
 
 import com.cys.blog.pojo.User;
 

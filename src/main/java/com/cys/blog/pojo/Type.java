@@ -1,6 +1,7 @@
 package com.cys.blog.pojo;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -15,6 +16,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "t_type")
+@ToString(exclude = "blogs")
 public class Type {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
