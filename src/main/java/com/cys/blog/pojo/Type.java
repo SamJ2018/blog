@@ -25,4 +25,7 @@ public class Type {
     private String name;
     @OneToMany(mappedBy = "type")
     private List<Blog> blogs = new ArrayList<>();
+
+    @ManyToOne
+    private User user;
 }

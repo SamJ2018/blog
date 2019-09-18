@@ -1,9 +1,14 @@
 body {
     background: url("../images/bg.png");
 }
-
+.m-padded-zero{
+    padding: 0em !important;
+}
 .m-padded-mini {
     padding: 0.2em !important;
+}
+.m-padded-normal{
+    padding: 0.4em !important;
 }
 
 .m-padded-tiny {
@@ -54,12 +59,12 @@ body {
 /*-------text -----*/
 
 .m-text {
-    font-weight: 300 !important;
-    letter-spacing: 1px !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.5px !important;
     line-height: 1.8;
 }
 .m-text-thin {
-    font-weight: 300 !important;
+    font-weight: 400 !important;
 }
 .m-text-spaced {
     letter-spacing: 1px !important;
@@ -87,6 +92,11 @@ body {
 
 .m-margin-bottom-small {
     margin-bottom: 0.5em !important;
+
+}
+
+.m-margin-bottom-large {
+    margin-bottom: 2em !important;
 
 }
 
@@ -144,6 +154,10 @@ body {
 /*-----color-----*/
 .m-black {
     color: #333 !important;
+}
+
+.m-teal {
+    color: #00B5AD !important;
 }
 
 .m-mobile-show {

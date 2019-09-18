@@ -4,3 +4,9 @@ spring:
 
   profiles:
     active: dev
+
+comment.avatar: /images/avatar1.png
+user.avatar: /images/avatar2.png
+
+accessKeyId: LTAIg2ZtRpWshzyK
+accessKeySecret: vAGfINEeTjuUm3Bw5h3hVfmIcH9ygm

@@ -9,4 +9,8 @@ import com.cys.blog.pojo.User;
  **/
 public interface UserService {
     User checkUser(String username, String password);
+
+    void saveUser(User user);
+
+    User findUser(String username);
 }

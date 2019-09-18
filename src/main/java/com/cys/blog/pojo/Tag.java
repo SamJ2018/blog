@@ -19,7 +19,7 @@ import java.util.List;
 public class Tag {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     private String name;
     @ManyToMany(mappedBy = "tags")
     private List<Blog> blogs=new ArrayList<>();

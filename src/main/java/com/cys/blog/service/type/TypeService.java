@@ -1,6 +1,7 @@
 package com.cys.blog.service.type;
 
 import com.cys.blog.pojo.Type;
+import com.cys.blog.pojo.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -17,7 +18,7 @@ public interface TypeService {
 
     Type getType(Long id);
 
-    Page<Type> listType(Pageable pageable);
+    Page<Type> listType(Pageable pageable, User user);
 
     List<Type> listType();
 
@@ -26,4 +27,6 @@ public interface TypeService {
     Type updateType(Long id, Type type);
 
     void deleteType(Long id);
+
+    List<Type> listTypeTop(Integer size);
 }

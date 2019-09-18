@@ -11,8 +11,7 @@
 <div class="ui attached pointing menu">
     <div class="ui container">
         <div class="right menu">
-            <a href="#" class="item">发布</a>
-            <a href="#" class="teal active item">列表</a>
+            <a th:href="@{/admin/blogs/input}" class="item">发布</a>
         </div>
     </div>
 </div>
@@ -22,7 +21,7 @@
     <div class="ui container">
       <div class="ui success large message">
           <h2>Hi，</h2>
-          <p>Sam 欢迎登陆!</p>
+          <span th:text="${session.user.nickname}"> </span> <span>欢迎登陆!</span>
       </div>
         <img th:src="@{/images/bg2.jpg}" alt="" class="ui rounded bordered fluid image">
     </div>

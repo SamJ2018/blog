@@ -18,17 +18,34 @@
     <div class="ui container">
         <div class="ui inverted secondary stackable menu">
             <h2 class="ui teal header item">Dreamax</h2>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==1}?'active'"><i class="home icon"></i>首页</a>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==2}?'active'"><i class="idea icon"></i>分类</a>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==3}?'active'"><i class="tags icon"></i>标签</a>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==4}?'active'"><i class="clone icon"></i>归档</a>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==5}?'active'"><i class="info icon"></i>关于我</a>
+            <a th:href="@{/}" class="m-item item m-mobile-hide" th:classappend="${n==1}?'active'"><i
+                    class="home icon"></i>首页</a>
+            <a th:href="@{/types/-1}" class="m-item item m-mobile-hide" th:classappend="${n==2}?'active'"><i
+                    class="idea icon"></i>分类</a>
+            <a th:href="@{/tags/-1}" class="m-item item m-mobile-hide" th:classappend="${n==3}?'active'"><i
+                    class="tags icon"></i>标签</a>
+            <a th:href="@{/archives}" class="m-item item m-mobile-hide" th:classappend="${n==4}?'active'"><i
+                    class="clone icon"></i>归档</a>
+            <a th:href="@{/about}" class="m-item item m-mobile-hide" th:classappend="${n==5}?'active'"><i
+                    class="info icon"></i>关于我</a>
             <div class="right m-item item m-mobile-hide">
-                <div class="ui icon inverted transparent input m-margin-tb-tiny">
-                    <input type="text" placeholder="搜索">
-                    <i class="search link icon"></i>
+                <form name="search" action="#" th:action="@{/search}" method="post" target="_blank">
+                    <div class="ui icon inverted transparent input m-margin-tb-tiny">
+                        <input type="text" name="query" placeholder="搜索" th:value="${query}">
+                        <i onclick="document.forms['search'].submit()" class="search link icon"></i>
+                    </div>
+                </form>
+                <a th:href="@{/admin}" th:if="${session.user}==null" class="m-item item m-mobile-hide">登陆</a>
+                <div class="ui dropdown  item" th:if="${session.user}!=null">
+                    <div class="text">
+                        <img class="ui avatar image" th:src="@{${session.user.avatar}}">
+                        <span th:text="${session.user.nickname}"></span>
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a th:href="@{/admin/logout}" class="item">注销</a>
+                    </div>
                 </div>
-                <a th:href="@{/admin}" class="m-item item m-mobile-hide" >登陆</a>
             </div>
         </div>
     </div>
@@ -65,7 +82,7 @@
             </div>
             <div class="seven wide column">
                 <h4 class="ui inverted header m-text-thin m-text-spaced ">Blog</h4>
-                <p class="m-text-thin m-text-spaced m-opacity-mini">这是我的个人博客、会分享关于编程、写作、思考相关的任何内容，希望可以给来到这儿的人有所帮助...</p>
+                <p class="m-text-thin m-text-spaced m-opacity-mini">这是一个可以写博客，可以互动，可以交友的平台</p>
             </div>
         </div>
         <div class="ui inverted section divider"></div>
@@ -82,6 +99,16 @@
     <script th:src="@{/lib/tocbot/tocbot.min.js}"></script>
     <script th:src="@{/lib/qrcode/qrcode.min.js}"></script>
     <script th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
+
+    <script>
+        $('.ui.dropdown').dropdown({
+            on: 'hover'
+        });
+
+        $('.menu.toggle').click(function () {
+            $('.m-item').toggleClass('m-mobile-hide');
+        });
+    </script>
 </th:block>
 
 </body>

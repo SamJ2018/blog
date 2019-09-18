@@ -26,7 +26,7 @@ public class Blog {
 
     private String title;
     private String firstPicture;
-    private String flag;
+    private String flag = "原创";
     private Integer views;
     private boolean appreciation; //赞赏是否开启
     private boolean shareStatement;
@@ -51,7 +51,7 @@ public class Blog {
     @ManyToOne
     private User user;
     @OneToMany(mappedBy = "blog")
-    private List<Comment> comments=new ArrayList<>();
+    private List<Comment> comments = new ArrayList<>();
 
 
     public void init() {

@@ -23,6 +23,7 @@ public class Comment {
     private Long id;
     private String nickname;
     private String email;
+    private String content;
     private String avatar;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -36,4 +37,6 @@ public class Comment {
 
     @ManyToOne
     private Comment parentComment;
+
+    private boolean adminComment;
 }

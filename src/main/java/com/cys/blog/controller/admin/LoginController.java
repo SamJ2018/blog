@@ -25,7 +25,11 @@ public class LoginController {
     private UserService userService;
 
     @GetMapping
-    public String loginPage() {
+    public String loginPage(HttpSession session) {
+
+        if (session.getAttribute("user") != null) {
+            return "admin/index";
+        }
         return "admin/login";
     }
 
@@ -38,6 +42,7 @@ public class LoginController {
         if (user != null) {
             user.setPassword(null);
             session.setAttribute("user", user);
+            session.setMaxInactiveInterval(60 * 60 * 10);
             return "admin/index";
         } else {
             attributes.addFlashAttribute("message", "用户名和密码错误"); //不能用model

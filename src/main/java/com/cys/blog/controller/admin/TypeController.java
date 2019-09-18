@@ -1,6 +1,7 @@
 package com.cys.blog.controller.admin;
 
 import com.cys.blog.pojo.Type;
+import com.cys.blog.pojo.User;
 import com.cys.blog.service.type.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 /**
@@ -31,8 +33,8 @@ public class TypeController {
 
     @GetMapping("/types")
     public String list(@PageableDefault(size = 8, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
-            , Model model) {
-        model.addAttribute("page", typeService.listType(pageable));
+            , Model model, HttpSession session) {
+        model.addAttribute("page", typeService.listType(pageable,(User)session.getAttribute("user")));
         return "admin/types";
     }
 
@@ -57,12 +59,13 @@ public class TypeController {
      * @return
      */
     @PostMapping("/types")
-    public String post(@Valid Type type, BindingResult result, RedirectAttributes attributes) {
+    public String post(@Valid Type type, BindingResult result, RedirectAttributes attributes,HttpSession session) {
         Type type1 = typeService.getTypeByName(type.getName());
         if (type1 != null) {
             result.rejectValue("name", "nameError", "类型不能重复");
             return "admin/types-input";
         }
+        type.setUser((User) session.getAttribute("user"));
 
         if (result.hasErrors()) {
             return "admin/types-input";

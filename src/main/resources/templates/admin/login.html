@@ -35,7 +35,7 @@
                     <div class="ui message negative mini" th:unless="${#strings.isEmpty(message)}" th:text="${message}">用户名或密码错误</div>
                 </form>
                 <div class="ui message">
-                    还没有帐户? &nbsp;&nbsp;&nbsp; <a href="#">注册</a>
+                    还没有帐户? &nbsp;&nbsp;&nbsp; <a th:href="@{/register}">注册</a>
                 </div>
             </div>
         </div>

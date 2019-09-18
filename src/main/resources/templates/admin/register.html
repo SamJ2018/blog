@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_fragments :: head(~{::title})">
+    <title>注册页面</title>
+</head>
+<body>
+<br><br><br>
+<div class="m-container-small m-padded-tb-massive" style="max-width: 30em !important;">
+    <div class="container">
+        <div class="ui middle aligned center aligned grid">
+            <div class="column">
+                <h2 class="ui teal image header">
+                    <div class="content">
+                        用户注册
+                    </div>
+                </h2>
+                <div class="ui large form" method="post" action="/afterRegister">
+                    <div class="ui stacked segment">
+                        <div class="required field">
+                            <div class="ui left icon input">
+                                <i class="write icon"></i>
+                                <input type="text" name="nickname" id="nickname" placeholder="昵称">
+                            </div>
+                        </div>
+                        <div class="required field">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" name="username" id="username" placeholder="用户名">
+                            </div>
+                        </div>
+                        <div class="required field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="password" name="password" id="password" placeholder="密码">
+                            </div>
+                        </div>
+                        <div class="required field">
+                            <div class="ui left icon input">
+                                <i class="envelope icon"></i>
+                                <input type="email" name="email" id="email" placeholder="邮箱">
+                            </div>
+                        </div>
+
+
+                        <div class="required field">
+                            <div class="ui action input">
+                                <input type="text" name="phone" id="phone" placeholder="手机号">
+                                <button class="ui teal right labeled icon button validateCode" type="button"><i
+                                        class="code icon "></i>验证码
+                                </button>
+                            </div>
+                        </div>
+                        <div class="required field">
+                            <div class="ui left icon input">
+                                <i class="code icon"></i>
+                                <input type="text" name="code" id="code" placeholder="验证码">
+                            </div>
+                        </div>
+                        <button class="ui fluid large teal submit button register">注册</button>
+                    </div>
+
+                    <div class="ui mini error message"></div>
+                    <div class="ui message negative mini" th:unless="${#strings.isEmpty(message)}" th:text="${message}" id="error_message">
+                        注册失败
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--/*/<th:block th:replace="_fragments::script">/*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
+<script>
+
+    $(function () {
+        var validCode = true;
+        $(".validateCode").click(function () {
+            var phone = $("#phone").val();
+            $.ajax({
+                url: "/registerValidate",
+                type: "post",
+                data: {phone: phone},
+                dataType: "json",
+                success: function (data) {
+                    alert("发送成功！");
+                }, error: function (data) {
+                    alert(data)
+                }
+            });
+
+            var time = 60;
+            var code = $(this);
+            if (validCode) {
+                validCode = false;
+                code.addClass("msgs1");
+                var t = setInterval(function () {
+                    time--;
+                    code.html(time + "秒");
+                    if (time == 0) {
+                        clearInterval(t);
+                        code.html("重新获取");
+                        validCode = true;
+                        code.removeClass("msgs1");
+                    }
+                }, 1000)
+            }
+        });
+
+        $('.register').click(function () {
+            var phone = $("#phone").val();
+            var email = $("#email").val();
+            var username = $("#username").val();
+            var password = $("#password").val();
+            var nickname = $("#nickname").val();
+            var code = $("#code").val();
+
+            $.ajax({
+                url: "/afterRegister",
+                type: "post",
+                data: {
+                    "phone": phone,
+                    "email": email,
+                    "username": username,
+                    "password": password,
+                    "nickname": nickname,
+                    "code": code
+                },
+                dataType: "json",
+                success:
+                    function (data) {
+                        alert("注册成功");
+                        window.location.href = "/admin";
+                    }
+                ,
+                error: function (data) {
+                    alert("注册失败！")
+                }
+            })
+            ;
+        });
+    });
+
+    $('.ui.form').form({
+        inline: true,
+        on: 'blur',
+        fields: {
+            nickname: {
+                identifier: 'nickname',
+                rules: [
+                    {
+                        type: 'empty',
+                        prompt: '请输入昵称'
+                    }
+                ]
+            },
+            username: {
+                identifier: 'username',
+                rules: [
+                    {
+                        type: 'empty',
+                        prompt: '请输入用户名'
+                    }
+                ]
+            },
+            password: {
+                identifier: 'password',
+                rules: [
+                    {
+                        type: 'empty',
+                        prompt: '请输入密码'
+                    }
+                ]
+            }
+            , email: {
+                identifier: "email",
+                rules: [
+                    {
+                        type: 'empty',
+                        prompt: "邮箱不能为空"
+                    },
+                    {
+                        type: 'email',
+                        optional: true,
+                        prompt: "邮箱格式不正确"
+                    }
+                ]
+            },
+            phone: {
+                identifier: 'phone',
+                rules: [
+                    {
+                        type: 'number',
+                        prompt: "手机号码只允许数字"
+                    },
+                    {
+                        type: 'exactLength[11]',
+                        prompt: "手机号码长度不正确"
+                    }
+                ]
+            }
+        }
+    });
+</script>
+</body>
+</html>

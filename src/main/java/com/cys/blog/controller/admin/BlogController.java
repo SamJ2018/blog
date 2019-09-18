@@ -43,16 +43,20 @@ public class BlogController {
     private TagService tagService;
 
     @GetMapping("/blogs")
-    public String list(@PageableDefault(size = 8, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable, BlogQuery blog, Model model) {
+    public String list(@PageableDefault(size = 8,
+            sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
+                       BlogQuery blog,
+                       Model model,
+                       HttpSession session) {
         model.addAttribute("types", typeService.listType());
-        model.addAttribute("page", blogService.listBlog(pageable, blog));
+        model.addAttribute("page", blogService.listBlog(pageable, blog, (User) session.getAttribute("user")));
         return LIST;
     }
 
     @PostMapping("/blogs/search")
     public String search(@PageableDefault(size = 8, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
-                         BlogQuery blog, Model model) {
-        model.addAttribute("page", blogService.listBlog(pageable, blog));
+                         BlogQuery blog, Model model, HttpSession session) {
+        model.addAttribute("page", blogService.listBlog(pageable, blog, (User) session.getAttribute("user")));
         return "admin/blogs :: blogList";
     }
 
@@ -79,14 +83,14 @@ public class BlogController {
 
     @PostMapping("/blogs")
     public String post(Blog blog, RedirectAttributes attributes, HttpSession session) {
-        blog.setUser((User) session.getAttribute("user"));
+        User user = (User) session.getAttribute("user");
+        blog.setUser(user);
         blog.setType(typeService.getType(blog.getType().getId()));
         blog.setTags(tagService.listTag(blog.getTagIds()));
         Blog b;
         if (blog.getId() == null) {
             b = blogService.saveBlog(blog);
         } else {
-            System.out.println(blog);
             b = blogService.updateBlog(blog.getId(), blog);
         }
 
