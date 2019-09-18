@@ -10,6 +10,7 @@
     <link rel="stylesheet" th:href="@{/lib/prism/prism.css}">
     <link rel="stylesheet" th:href="@{/lib/tocbot/tocbot.css}">
     <link rel="stylesheet" th:href="@{/css/me.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css" integrity="sha384-BdGj8xC2eZkQaxoQ8nSLefg4AV4/AwB3Fj+8SUSo7pnKP6Eoy18liIKTPn9oBYNG" crossorigin="anonymous">
 </head>
 <body>
 
@@ -67,10 +68,8 @@
             </div>
             <div class="three wide column">
                 <h4 class="ui inverted header m-text-thin m-text-spaced ">最新博客</h4>
-                <div class="ui inverted link list">
-                    <a href="#" class="item m-text-thin">用户故事（User Story）</a>
-                    <a href="#" class="item m-text-thin">用户故事（User Story）</a>
-                    <a href="#" class="item m-text-thin">用户故事（User Story）</a>
+                <div class="ui inverted link list" th:fragment="newblogList">
+                    <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item m-text-thin" th:each="blog : ${newblogs}" th:text="${blog.title}"></a>
                 </div>
             </div>
             <div class="three wide column">
@@ -99,6 +98,9 @@
     <script th:src="@{/lib/tocbot/tocbot.min.js}"></script>
     <script th:src="@{/lib/qrcode/qrcode.min.js}"></script>
     <script th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.js" integrity="sha384-JiKN5O8x9Hhs/UE5cT5AAJqieYlOZbGT3CHws/y97o3ty4R7/O5poG9F3JoiOYw1" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.0/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script>
 
     <script>
         $('.ui.dropdown').dropdown({

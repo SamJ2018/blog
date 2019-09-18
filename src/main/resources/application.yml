@@ -10,3 +10,11 @@ user.avatar: /images/avatar2.png
 
 accessKeyId: LTAIg2ZtRpWshzyK
 accessKeySecret: vAGfINEeTjuUm3Bw5h3hVfmIcH9ygm
+ucloud:
+  ufile:
+    public-key: TOKEN_3e339c55-9494-4c3e-9ed8-67e2779ee6ae
+    private-key: d6e7a671-4fdf-436f-baa6-ad749dd9fa0c
+    buckect-name: dreamax
+    region: cn-bj
+    suffix: ufileos.com
+    expires: 315360000

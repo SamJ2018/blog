@@ -149,7 +149,11 @@
             height  : 640,
             syncScrolling : "single",
 //        path    : "../static/lib/editormd/lib/"
-            path    : "/lib/editormd/lib/"
+            watch:false,
+            path    : "/lib/editormd/lib/",
+            imageUpload    : true,
+            imageFormats   : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL : "/file/upload"
         });
     });
     $('.menu.toggle').click(function () {

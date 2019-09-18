@@ -71,7 +71,10 @@
                     <div class="ui padded vertical segment m-padded-tb-large" th:each="blog : ${page.content}">
                         <div class="ui middle aligned mobile reversed stackable grid" >
                             <div class="eleven wide column">
-                                <h3 class="ui header" ><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" class="m-black" th:text="${blog.title}"></a></h3>
+                                <h3 class="ui header" >
+                                    <a class="ui red ribbon label" th:if="${blog.title}=='测试专用'">置顶</a>
+                                    <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" class="m-black" th:text="${blog.title}"></a>
+                                </h3>
                                 <p class="m-text" th:text="|${blog.description}......|"></p>
                                 <div class="ui grid">
                                     <div class="eleven wide column">
