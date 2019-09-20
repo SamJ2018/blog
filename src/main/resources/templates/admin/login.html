@@ -35,7 +35,8 @@
                     <div class="ui message negative mini" th:unless="${#strings.isEmpty(message)}" th:text="${message}">用户名或密码错误</div>
                 </form>
                 <div class="ui message">
-                    还没有帐户? &nbsp;&nbsp;&nbsp; <a th:href="@{/register}">注册</a>
+                    <div>还没有帐户? &nbsp;&nbsp;&nbsp; <a th:href="@{/register}">注册</a></div>
+                    <div><a href="#" class="ui circular icon button"><i class="github icon"></i></a><a th:href="@{https://github.com/login/oauth/authorize(client_id='1572121ada7cbca3061f',redirect_uri='http://localhost/login/callback',scope='user',state=1)}">GitHub登陆</a></div>
                 </div>
             </div>
         </div>

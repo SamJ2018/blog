@@ -5,11 +5,12 @@ spring:
   profiles:
     active: dev
 
-comment.avatar: /images/avatar1.png
+comment.avatar: /images/anonymity.jpg
 user.avatar: /images/avatar2.png
 
 accessKeyId: LTAIg2ZtRpWshzyK
 accessKeySecret: vAGfINEeTjuUm3Bw5h3hVfmIcH9ygm
+
 ucloud:
   ufile:
     public-key: TOKEN_3e339c55-9494-4c3e-9ed8-67e2779ee6ae
@@ -18,3 +19,7 @@ ucloud:
     region: cn-bj
     suffix: ufileos.com
     expires: 315360000
+
+github.client.id: 1572121ada7cbca3061f
+github.client.secret: afe0f11ad5c987a4f4298e29d3f36c708019bfac
+github.redirect.uri: http://localhost/login/callback

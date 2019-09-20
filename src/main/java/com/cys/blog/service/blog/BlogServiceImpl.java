@@ -65,9 +65,6 @@ public class BlogServiceImpl implements BlogService {
             public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
                 List<Predicate> predicates = new ArrayList<>();
 
-                if (user == null)
-                    return null;
-
                 if (!"".equals(blogQuery.getTitle()) && blogQuery.getTitle() != null) {
                     predicates.add(criteriaBuilder.like(root.<String>get("title"), "%" + blogQuery.getTitle() + "%"));
                 }
@@ -80,7 +77,9 @@ public class BlogServiceImpl implements BlogService {
                     predicates.add(criteriaBuilder.equal(root.<Boolean>get("recommend"), blogQuery.isRecommend()));
                 }
 
-                predicates.add(criteriaBuilder.equal(root.<User>get("user"), user));
+                if (user != null){
+                    predicates.add(criteriaBuilder.equal(root.<User>get("user"), user));
+                }
 
                 query.where(predicates.toArray(new Predicate[predicates.size()]));
                 return null;
@@ -89,11 +88,11 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Map<String, List<Blog>> archiveBlog() {
+    public Map<String, Page<Blog>> archiveBlog(Pageable pageable) {
         List<String> years = blogRepository.findGroupYear();
-        Map<String, List<Blog>> map = new HashMap<>();
+        Map<String, Page<Blog>> map = new HashMap<>();
         for (String year : years) {
-            map.put(year, blogRepository.findByYear(year));
+            map.put(year, blogRepository.findByYear(year, pageable));
         }
         return map;
     }

@@ -16,7 +16,7 @@ import java.util.List;
 @Entity
 @Table(name="t_comment")
 @Data
-@ToString(exclude = "blog")
+@ToString(exclude = {"blog"})
 public class Comment {
     @Id
     @GeneratedValue
@@ -31,6 +31,7 @@ public class Comment {
 
     @ManyToOne
     private Blog blog;
+
 
     @OneToMany(mappedBy = "parentComment")
     private List<Comment> replyComments=new ArrayList<>();

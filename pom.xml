@@ -19,6 +19,18 @@
     </properties>
 
     <dependencies>
+        <!--json解析-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.58</version>
+        </dependency>
+        <!--处理http请求-->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>3.14.1</version>
+        </dependency>
         <!--短信-->
         <dependency>
             <groupId>com.atlassian.commonmark</groupId>

@@ -6,6 +6,8 @@ import com.cys.blog.util.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
  * @author sam
  * @apiNote
@@ -24,7 +26,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(User user) {
-        userRepository.save(user);
+            userRepository.save(user);
     }
 
     @Override

@@ -95,11 +95,11 @@ public class RegisterController {
         maps.put("mobile", phone);
         maps.put("param", "{\"code\":\"" + code + "\"}");
 
-      /*  try {
+        try {
             this.messageListener.readMessage(maps);
         } catch (ClientException e) {
             e.printStackTrace();
-        }*/
+        }
 
         System.out.println(code);
         return code;

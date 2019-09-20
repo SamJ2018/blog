@@ -33,6 +33,7 @@ public class Blog {
     private boolean isComment; //评论是否开启
     private boolean published; //是否发布
     private boolean recommend; //是否推荐
+    private int topLevel;
 
     @Transient
     private String tagIds;

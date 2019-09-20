@@ -38,5 +38,5 @@ public interface BlogRepository extends JpaRepository<Blog, Long>, JpaSpecificat
     List<String> findGroupYear();
 
     @Query("select b from Blog b where function('date_format',b.updateTime,'%Y') = ?1")
-    List<Blog> findByYear(String year);
+    Page<Blog> findByYear(String year,Pageable pageable);
 }

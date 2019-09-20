@@ -16,7 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "t_user")
 @Data
-@ToString(exclude = {"blogs","types"})
+@ToString(exclude = {"blogs","type"})
 public class User {
     @Id
     @GeneratedValue()
@@ -28,6 +28,7 @@ public class User {
     private Integer type;
     private String username;
     private String phone;
+    private String token;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
@@ -36,7 +37,4 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Blog> blogs=new ArrayList<>();
-
-    @OneToMany(mappedBy = "user")
-    private List<Type> types=new ArrayList<>();
 }

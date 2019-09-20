@@ -25,7 +25,7 @@ public interface BlogService {
 
     Page<Blog> listBlog(Pageable pageable, BlogQuery blogQuery, User user);
 
-    Map<String,List<Blog>> archiveBlog();
+    Map<String, Page<Blog>> archiveBlog(Pageable pageable);
 
     Long countBlog();
 
